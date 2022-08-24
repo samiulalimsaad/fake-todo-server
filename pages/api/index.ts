@@ -19,11 +19,17 @@ const handler = nc<NextApiRequest, NextApiResponse>({
     .use(
         cors({
             origin: "*",
-            methods: "*",
+            methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
             preflightContinue: false,
             optionsSuccessStatus: 204,
         })
     )
+    .use((req, res, next) => {
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        res.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
+        res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+        next();
+    })
     .get(async (req, res) => {
         res.json(todos);
     })
