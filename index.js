@@ -16,25 +16,30 @@ const nextId = () =>
 app.get("/", async (req, res) => {
     res.json(todos);
 });
+
 app.post("/", async (req, res) => {
+    const id = nextId();
     todos.push({
-        id: nextId(),
+        id,
         text: req.body.text,
         completed: false,
         color: "",
     });
 
-    res.json(todos);
+    res.json(todos[id - 1]);
 });
+
 app.delete("/:id", async (req, res) => {
     const id = req.params.id;
+    const data = todos[id - 1];
     todos.splice(+id - 1, 1);
-    res.json(todos);
+    res.json(data);
 });
+
 app.patch("/:id", async (req, res) => {
     const id = req?.params?.id;
     todos[id - 1] = { ...todos[+id - 1], ...req.body };
-    res.json(todos);
+    res.json(todos[id - 1]);
 });
 
 app.listen(PORT, async () => {
