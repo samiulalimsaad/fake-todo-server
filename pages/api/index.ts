@@ -16,7 +16,12 @@ const handler = nc<NextApiRequest, NextApiResponse>({
         res.status(404).end("Page is not found");
     },
 })
-    .use(cors())
+    .use(
+        cors({
+            origin: "*",
+            optionsSuccessStatus: 200, //
+        })
+    )
     .get(async (req, res) => {
         res.json(todos);
     })
