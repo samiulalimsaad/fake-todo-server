@@ -1,4 +1,3 @@
-// pages/api/hello.js
 import { NextApiRequest, NextApiResponse } from "next";
 import nc from "next-connect";
 import { todos } from "../../todos";
@@ -15,14 +14,7 @@ const handler = nc<NextApiRequest, NextApiResponse>({
         res.status(404).end("Page is not found");
     },
 })
-    // .use(
-    //     cors({
-    //         origin: "*",
-    //         methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
-    //         preflightContinue: false,
-    //         optionsSuccessStatus: 204,
-    //     })
-    // )
+    .options(async (req, res) => res.status(200).send("ok"))
     .get(async (req, res) => {
         res.json(todos);
     })
