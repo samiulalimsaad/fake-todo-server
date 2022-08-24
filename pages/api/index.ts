@@ -1,5 +1,5 @@
+import { cors } from "cors";
 // pages/api/hello.js
-import cors from "cors";
 import { NextApiRequest, NextApiResponse } from "next";
 import nc from "next-connect";
 import { todos } from "../../todos";
@@ -19,7 +19,7 @@ const handler = nc<NextApiRequest, NextApiResponse>({
     .use(
         cors({
             origin: "*",
-            methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+            methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
             preflightContinue: false,
             optionsSuccessStatus: 204,
         })
@@ -34,6 +34,12 @@ const handler = nc<NextApiRequest, NextApiResponse>({
         res.json(todos);
     })
     .post(async (req, res) => {
+        // await NextCors(req, res, {
+        //     // Options
+        //     methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
+        //     origin: "*",
+        //     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+        // });
         todos.push({
             id: nextId(),
             text: req.body.text,
@@ -44,11 +50,23 @@ const handler = nc<NextApiRequest, NextApiResponse>({
         res.json(todos);
     })
     .delete(async (req, res) => {
+        // await NextCors(req, res, {
+        //     // Options
+        //     methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
+        //     origin: "*",
+        //     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+        // });
         const id = req?.query?.id!;
         todos.splice(+id - 1, 1);
         res.json(todos);
     })
     .patch(async (req, res) => {
+        // await NextCors(req, res, {
+        //     // Options
+        //     methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
+        //     origin: "*",
+        //     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+        // });
         const id = req?.query?.id!;
         todos[+id - 1] = { ...todos[+id - 1], ...req.body };
         res.json(todos);
