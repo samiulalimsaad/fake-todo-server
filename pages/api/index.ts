@@ -1,7 +1,6 @@
 // pages/api/hello.js
 import { NextApiRequest, NextApiResponse } from "next";
 import nc from "next-connect";
-import NextCors from "nextjs-cors";
 import { todos } from "../../todos";
 
 const nextId = () =>
@@ -24,22 +23,10 @@ const handler = nc<NextApiRequest, NextApiResponse>({
     //         optionsSuccessStatus: 204,
     //     })
     // )
-    // .use((req, res, next) => {
-    //     res.setHeader("Access-Control-Allow-Origin", "*");
-    //     res.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
-    //     res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-    //     next();
-    // })
     .get(async (req, res) => {
         res.json(todos);
     })
     .post(async (req, res) => {
-        await NextCors(req, res, {
-            // Options
-            methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
-            origin: "*",
-            optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
-        });
         todos.push({
             id: nextId(),
             text: req.body.text,
@@ -50,23 +37,11 @@ const handler = nc<NextApiRequest, NextApiResponse>({
         res.json(todos);
     })
     .delete(async (req, res) => {
-        await NextCors(req, res, {
-            // Options
-            methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
-            origin: "*",
-            optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
-        });
         const id = req?.query?.id!;
         todos.splice(+id - 1, 1);
         res.json(todos);
     })
     .patch(async (req, res) => {
-        await NextCors(req, res, {
-            // Options
-            methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
-            origin: "*",
-            optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
-        });
         const id = req?.query?.id!;
         todos[+id - 1] = { ...todos[+id - 1], ...req.body };
         res.json(todos);
