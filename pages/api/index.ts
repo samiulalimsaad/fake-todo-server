@@ -1,4 +1,4 @@
-import { cors } from "cors";
+import cors from "cors";
 // pages/api/hello.js
 import { NextApiRequest, NextApiResponse } from "next";
 import nc from "next-connect";
