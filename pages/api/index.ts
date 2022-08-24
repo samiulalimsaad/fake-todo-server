@@ -19,7 +19,9 @@ const handler = nc<NextApiRequest, NextApiResponse>({
     .use(
         cors({
             origin: "*",
-            optionsSuccessStatus: 200, //
+            methods: "*",
+            preflightContinue: false,
+            optionsSuccessStatus: 204,
         })
     )
     .get(async (req, res) => {
