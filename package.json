@@ -2,26 +2,15 @@
     "name": "todo-fake-server",
     "version": "0.1.0",
     "private": true,
+    "type": "module",
     "scripts": {
-        "dev": "next dev",
-        "build": "next build",
-        "start": "json-server --watch db_todos.json --no-cors true",
-        "lint": "next lint"
+        "dev": "nodemon index.js",
+        "start": "node index.js"
     },
     "dependencies": {
-        "json-server": "^0.17.0",
-        "next": "12.2.5",
-        "next-connect": "^0.13.0",
-        "react": "18.2.0",
-        "react-dom": "18.2.0"
+        "cors": "^2.8.5",
+        "express": "^4.18.1",
+        "nodemon": "^2.0.19"
     },
-    "devDependencies": {
-        "@types/cors": "^2.8.12",
-        "@types/node": "18.7.13",
-        "@types/react": "18.0.17",
-        "@types/react-dom": "18.0.6",
-        "eslint": "8.22.0",
-        "eslint-config-next": "12.2.5",
-        "typescript": "4.7.4"
-    }
+    "devDependencies": {}
 }
