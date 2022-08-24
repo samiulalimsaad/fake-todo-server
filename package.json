@@ -5,10 +5,11 @@
     "scripts": {
         "dev": "next dev",
         "build": "next build",
-        "start": "next start",
+        "start": "json-server --watch db_todos.json --no-cors true",
         "lint": "next lint"
     },
     "dependencies": {
+        "json-server": "^0.17.0",
         "next": "12.2.5",
         "next-connect": "^0.13.0",
         "react": "18.2.0",
